@@ -1,8 +1,5 @@
 {
   "dependencies": {
-    "com.vrchat.clientsim": {
-      "version": "1.2.7"
-    },
     "com.vrchat.base": {
       "version": "^3.1.x"
     },
@@ -14,15 +11,15 @@
     },
     "dev.onevr.vrworldtoolkit": {
       "version": "2.1.5"
+    },
+    "vrchat.jordo.easyquestswitch": {
+      "version": "1.2.1"
+    },
+    "com.llealloo.audiolink": {
+      "version": "1.2.0"
     }
   },
   "locked": {
-    "com.vrchat.clientsim": {
-      "version": "1.2.7",
-      "dependencies": {
-        "com.vrchat.worlds": "^3.2.2"
-      }
-    },
     "com.vrchat.worlds": {
       "version": "3.4.1",
       "dependencies": {
@@ -42,6 +39,14 @@
       "dependencies": {
         "com.vrchat.base": "^3.2.x"
       }
+    },
+    "vrchat.jordo.easyquestswitch": {
+      "version": "1.2.1",
+      "dependencies": {}
+    },
+    "com.llealloo.audiolink": {
+      "version": "1.2.0",
+      "dependencies": {}
     }
   }
 }
