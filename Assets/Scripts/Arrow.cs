@@ -7,6 +7,7 @@ using VRC.Udon;
 using VRC.Udon.Common;
 
 [RequireComponent(typeof(VRCPickup))]
+[RequireComponent(typeof(Rigidbody))]
 public class Arrow : UdonSharpBehaviour
 {
     public float _sharpness = 1f;
@@ -15,10 +16,12 @@ public class Arrow : UdonSharpBehaviour
     private bool _isPickedUp = false;
     private float _plantStrength = 0f; // Can be used later to determine if the player has enough strength to pickup a planted arrow.
 
+    private Rigidbody _rb = null;
     private VRCPickup _vrcPickup = null;
 
     private void Start()
     {
+        _rb = GetComponent<Rigidbody>();
         _vrcPickup = GetComponent<VRCPickup>();
     }
 
@@ -35,15 +38,15 @@ public class Arrow : UdonSharpBehaviour
         /// Note 2: we could use a formula that computes the sharpness of the arrow, against the rigidity of the collided object
         /// to determine if the arrow can get planted or should rebound.
         
-        if (collision.impulse.magnitude < 20f)
-            return;
+        //if (collision.impulse.magnitude < 20f)
+        //    return;
 
         // When the arrow enters collision, we check if it should plant into the collider.
         foreach (ContactPoint contact in collision.contacts)
         {
             // The arrow should only plant in items on frontal collisions.
-            if (Vector3.Dot(contact.normal, transform.forward) > -0.5f)
-                continue;
+            //if (Vector3.Dot(contact.normal, transform.forward) > -0.5f)
+            //    continue;
 
             PlantArrow(collision.impulse.magnitude, collision.rigidbody.transform);
             break;
@@ -70,6 +73,10 @@ public class Arrow : UdonSharpBehaviour
         if (_isPickedUp)
             _vrcPickup.Drop();
 
+        _rb.velocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+        _rb.useGravity = false;
+        _rb.isKinematic = true;
         _isPlanted = true;
         _plantStrength = force;
         transform.SetParent(target);
@@ -77,6 +84,8 @@ public class Arrow : UdonSharpBehaviour
 
     private void UnplantArrow()
     {
+        _rb.useGravity = true;
+        _rb.isKinematic = false;
         _isPlanted = false;
     }
 }

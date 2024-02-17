@@ -1,5 +1,4 @@
 ﻿
-using System.Collections.Generic;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -10,14 +9,12 @@ public class LongBow : UdonSharpBehaviour
     public GameObject _arrowPrefab; // The arrow to be shot.
     public float _shootStrength = 1f; // The shoot strength.
 
-    private List<Collider> _bowColliders = null; // All colliders on the bow gameObject and its children.
+    private Collider[] _bowColliders = null; // All colliders on the bow gameObject and its children.
 
     private void Start()
     {
         // Retrieving all bow colliders. This is used later to prevent collisions between the arrow and the bow.
-        Collider[] bowColliders = GetComponentsInChildren<Collider>();
-        if (bowColliders != null)
-            _bowColliders = new List<Collider>(bowColliders);
+        _bowColliders = GetComponentsInChildren<Collider>();
     }
 
     public override void OnPickupUseDown()
