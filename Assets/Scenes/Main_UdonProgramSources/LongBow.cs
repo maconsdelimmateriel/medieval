@@ -20,7 +20,12 @@ public class LongBow : UdonSharpBehaviour
     public override void OnPickupUseDown()
     {
         base.OnPickupUseDown();
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Shoot");
+    }
 
+    //The bow shoots an arrow when trigger is pressed.
+    public void Shoot()
+    {
         // Instantiating the arrow. Object pooling should be used here in the future.
         GameObject arrow = Instantiate(_arrowPrefab, this.transform.position, this.transform.rotation);
 
