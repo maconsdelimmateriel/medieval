@@ -37,20 +37,22 @@ public class Arrow : UdonSharpBehaviour
 
         /// Note 2: we could use a formula that computes the sharpness of the arrow, against the rigidity of the collided object
         /// to determine if the arrow can get planted or should rebound.
-        
+
         //if (collision.impulse.magnitude < 20f)
         //    return;
+            // When the arrow enters collision, we check if it should plant into the collider.
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                // The arrow should only plant in items on frontal collisions.
+                //if (Vector3.Dot(contact.normal, transform.forward) > -0.5f)
+                //    continue;
 
-        // When the arrow enters collision, we check if it should plant into the collider.
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            // The arrow should only plant in items on frontal collisions.
-            //if (Vector3.Dot(contact.normal, transform.forward) > -0.5f)
-            //    continue;
+                PlantArrow(collision.impulse.magnitude, collision.rigidbody.transform);
+                break;
+            }
 
-            PlantArrow(collision.impulse.magnitude, collision.rigidbody.transform);
-            break;
-        }
+        this.gameObject.GetComponent<Collider>().enabled = false;
+
     }
 
     public override void OnPickup()
