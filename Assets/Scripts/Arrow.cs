@@ -19,6 +19,9 @@ public class Arrow : UdonSharpBehaviour
     private Rigidbody _rb = null;
     private VRCPickup _vrcPickup = null;
 
+    [SerializeField]
+    private int _damage = 4; //The damage the arrow inflicts on contact;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -51,8 +54,14 @@ public class Arrow : UdonSharpBehaviour
                 break;
             }
 
-        this.gameObject.GetComponent<Collider>().enabled = false;
+        //Arrow checks if object his is taking damaged.
+        if (collision.gameObject.GetComponent<Attacker>() != null)
+        {
+            Attacker attacker = collision.gameObject.GetComponent<Attacker>();
+            attacker.TakingDamage(_damage);
+        }
 
+        this.gameObject.GetComponent<Collider>().enabled = false;
     }
 
     public override void OnPickup()
