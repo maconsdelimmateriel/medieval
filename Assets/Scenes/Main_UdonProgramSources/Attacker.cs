@@ -18,6 +18,14 @@ public class Attacker : UdonSharpBehaviour
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Move");
     }
 
+    private void Update()
+    {
+        if (Vector3.Distance(gameObject.transform.position, door.position) <= 3) //Distance fixed for prototyping, should be changed to agent.stoppingdistance
+        {
+            door.gameObject.GetComponent<CastleDoor>().TakingDamage(100);
+        }
+    }
+
     //The attacker moves toward the castle door.
     public void Move()
     {
@@ -31,13 +39,14 @@ public class Attacker : UdonSharpBehaviour
 
         if (_health <= 0)
         {
-            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Dyting");
+            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Dying");
         }
     }
 
     //Called when the attacker dies.
     public void Dying()
     {
+        Destroy(gameObject); //Should be replaced by effect of death
         _agent.destination = transform.position;
     }
 }
