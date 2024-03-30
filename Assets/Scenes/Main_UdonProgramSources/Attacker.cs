@@ -7,30 +7,37 @@ using UnityEngine.AI;
 
 public class Attacker : UdonSharpBehaviour
 {
-    private Transform _door; //Position of the castle door.
+    public Transform door; //Position of the castle door.
     private NavMeshAgent _agent; //NavMeshAgent of the attacker.
     [SerializeField]
     private int _health = 10; //Health of the attacker.
-
+    private bool _isRange = false; //Is the attacker in front of the door?
+    
     void Start()
     {
-        _door = GameObject.Find("Door").transform; //Finding by tag or component not handled by Udonsharp? Need to find better ways to find objects.
+        //_door = GameObject.Find("Door").transform; //Finding by tag or component not handled by Udonsharp? Need to find better ways to find objects.
+
         _agent = GetComponent<NavMeshAgent>();
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Move");
     }
 
     private void Update()
     {
-        if (Vector3.Distance(gameObject.transform.position, _door.position) <= 3) //Distance fixed for prototyping, should be changed to agent.stoppingdistance
+        if (!_isRange)
         {
-            _door.gameObject.GetComponent<CastleDoor>().TakingDamage(100);
+            if (Vector3.Distance(gameObject.transform.position, door.position) <= 3) //Distance fixed for prototyping, should be changed to agent.stoppingdistance
+            {
+                door.gameObject.GetComponent<CastleDoor>().TakingDamage(100);
+                _agent.destination = transform.position;
+                _isRange = true;
+            }
         }
     }
 
     //The attacker moves toward the castle door.
     public void Move()
     {
-        _agent.destination = _door.position;
+        _agent.destination = door.position;
     }
 
     //Called when the attacker is taking damaged.

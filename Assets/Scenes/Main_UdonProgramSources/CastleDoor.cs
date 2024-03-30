@@ -9,11 +9,8 @@ public class CastleDoor : UdonSharpBehaviour
 {
     [SerializeField]
     private int _health = 10; //Health of the door.
-
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private GameObject _doorModel; //The 3D model of the castle door and its collider.
 
     //Called when the door is taking damaged.
     public void TakingDamage(int damage)
@@ -23,7 +20,6 @@ public class CastleDoor : UdonSharpBehaviour
 
         if (_health <= 0)
         {
-            Debug.Log("0");
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Dying");
         }
     }
@@ -31,6 +27,6 @@ public class CastleDoor : UdonSharpBehaviour
     //Called when the door dies.
     public void Dying()
     {
-        Destroy(this.gameObject);
+        _doorModel.SetActive(false);
     }
 }

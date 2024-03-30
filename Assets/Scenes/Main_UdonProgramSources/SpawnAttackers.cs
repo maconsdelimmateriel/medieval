@@ -11,7 +11,7 @@ public class SpawnAttackers : UdonSharpBehaviour
     [SerializeField]
     private Transform[] _spawnPoints; //All the spawn points for a wave.
     [SerializeField]
-    private GameObject _knightPrefab; //Prefab for a knight attacker
+    private GameObject[] _knights; //Pool of knights for wave.
 
     public override void Interact()
     {
@@ -21,10 +21,17 @@ public class SpawnAttackers : UdonSharpBehaviour
     // Instantiating attackers on each spawn point. Object pooling should be used here in the future.
     public void Spawn()
     {
-        foreach (Transform spawnPoint in _spawnPoints)
+        /*foreach (Transform spawnPoint in _spawnPoints)
         {
             
             GameObject attacker = Instantiate(_knightPrefab, spawnPoint.position, spawnPoint.rotation);
+            attacker.GetComponent<Attacker>().door = _door;
+        }*/
+
+        for (int i = 0; i < _spawnPoints.Length; i++)
+        {
+            _knights[i].transform.position = _spawnPoints[i].position;
+            _knights[i].SetActive(true);
         }
     }
 }
