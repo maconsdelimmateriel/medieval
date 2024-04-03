@@ -10,7 +10,7 @@ public class Attacker : UdonSharpBehaviour
     public Transform door; //Position of the castle door.
     private NavMeshAgent _agent; //NavMeshAgent of the attacker.
     [SerializeField]
-    private int _health = 10; //Health of the attacker.
+    private int _health = 14; //Health of the attacker.
     private bool _isRange = false; //Is the attacker in front of the door?
     
     void Start()
