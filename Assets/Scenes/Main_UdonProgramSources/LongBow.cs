@@ -8,6 +8,10 @@ public class LongBow : UdonSharpBehaviour
 {
     public GameObject _arrowPrefab; // The arrow to be shot.
     public float _shootStrength = 1f; // The shoot strength.
+    [SerializeField]
+    private AudioSource _preparingSound; //Sound played when grabbing the bow.
+    [SerializeField]
+    private AudioSource _shootSound; //Sound played when shooting.
 
     private Collider[] _bowColliders = null; // All colliders on the bow gameObject and its children.
 
@@ -17,10 +21,17 @@ public class LongBow : UdonSharpBehaviour
         _bowColliders = GetComponentsInChildren<Collider>();
     }
 
+    public override void OnPickup()
+    {
+        base.OnPickup();
+        _preparingSound.Play();
+    }
+
     public override void OnPickupUseDown()
     {
         base.OnPickupUseDown();
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Shoot");
+        _shootSound.Play();
     }
 
     //The bow shoots an arrow when trigger is pressed.

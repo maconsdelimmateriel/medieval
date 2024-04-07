@@ -21,6 +21,8 @@ public class Arrow : UdonSharpBehaviour
 
     [SerializeField]
     private int _damage = 4; //The damage the arrow inflicts on contact;
+    [SerializeField]
+    private AudioSource _impactSound; //Sound played on impact.
 
     private void Start()
     {
@@ -33,6 +35,8 @@ public class Arrow : UdonSharpBehaviour
         // The arrow cannot get planted once it's already planted.
         if (_isPlanted)
             return;
+
+        _impactSound.Play();
 
         /// Note 1: the velocity of the arrow shouldn't matter.
         /// If the arrow is not moving, and an object is moving fast towards the arrow, then the arrow should get planted.

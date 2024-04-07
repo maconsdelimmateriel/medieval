@@ -12,6 +12,8 @@ public class SpawnAttackers : UdonSharpBehaviour
     private Transform[] _spawnPoints; //All the spawn points for a wave.
     [SerializeField]
     private GameObject[] _knights; //Pool of knights for wave.
+    [SerializeField]
+    private AudioSource _startSound; //Sound played at the beginning of a wave.
 
     public override void Interact()
     {
@@ -21,6 +23,8 @@ public class SpawnAttackers : UdonSharpBehaviour
     // Instantiating attackers on each spawn point. Object pooling should be used here in the future.
     public void Spawn()
     {
+        _startSound.Play();
+
         /*foreach (Transform spawnPoint in _spawnPoints)
         {
             
