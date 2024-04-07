@@ -13,7 +13,7 @@ public class Attacker : UdonSharpBehaviour
     private int _health = 14; //Health of the attacker.
     private bool _isRange = false; //Is the attacker in front of the door?
     
-    void Start()
+    private void OnEnable()
     {
         //_door = GameObject.Find("Door").transform; //Finding by tag or component not handled by Udonsharp? Need to find better ways to find objects.
 
@@ -54,7 +54,7 @@ public class Attacker : UdonSharpBehaviour
     //Called when the attacker dies.
     public void Dying()
     {
-        Destroy(gameObject); //Should be replaced by effect of death
+        gameObject.SetActive(false);
         _agent.destination = transform.position;
     }
 }
