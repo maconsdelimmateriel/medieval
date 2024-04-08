@@ -12,7 +12,13 @@ public class Attacker : UdonSharpBehaviour
     [SerializeField]
     private int _health = 14; //Health of the attacker.
     private bool _isRange = false; //Is the attacker in front of the door?
-    
+    [SerializeField]
+    private AudioSource _movingSound; //Sound played when knight is moving.
+    [SerializeField]
+    private AudioSource _dyingSound; //Sound played when the knight dies.
+    [SerializeField]
+    private AudioSource _damagedSound; //Sound played when the knight takes damage.
+
     private void OnEnable()
     {
         //_door = GameObject.Find("Door").transform; //Finding by tag or component not handled by Udonsharp? Need to find better ways to find objects.
@@ -29,6 +35,7 @@ public class Attacker : UdonSharpBehaviour
             {
                 door.gameObject.GetComponent<CastleDoor>().TakingDamage(100);
                 _agent.destination = transform.position;
+                _movingSound.Stop();
                 _isRange = true;
             }
         }
@@ -38,12 +45,14 @@ public class Attacker : UdonSharpBehaviour
     public void Move()
     {
         _agent.destination = door.position;
+        _movingSound.Play();
     }
 
     //Called when the attacker is taking damaged.
     public void TakingDamage(int damage)
     {
         _health -= damage;
+        _damagedSound.Play();
 
         if (_health <= 0)
         {
@@ -54,6 +63,8 @@ public class Attacker : UdonSharpBehaviour
     //Called when the attacker dies.
     public void Dying()
     {
+        _movingSound.Stop();
+        //_dyingSound.Play(); //To decomment when dying animation.
         gameObject.SetActive(false);
         _agent.destination = transform.position;
     }

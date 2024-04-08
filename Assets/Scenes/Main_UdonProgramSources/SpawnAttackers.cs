@@ -14,7 +14,7 @@ public class SpawnAttackers : UdonSharpBehaviour
     private GameObject[] _knights; //Pool of knights for wave.
     [SerializeField]
     private AudioSource _startSound; //Sound played at the beginning of a wave.
-
+    
     public override void Interact()
     {
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Spawn");
