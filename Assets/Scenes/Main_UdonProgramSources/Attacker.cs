@@ -18,12 +18,14 @@ public class Attacker : UdonSharpBehaviour
     private AudioSource _dyingSound; //Sound played when the knight dies.
     [SerializeField]
     private AudioSource _damagedSound; //Sound played when the knight takes damage.
+    private Animator _anim; //Animator controller of the knight.
 
     private void OnEnable()
     {
         //_door = GameObject.Find("Door").transform; //Finding by tag or component not handled by Udonsharp? Need to find better ways to find objects.
 
         _agent = GetComponent<NavMeshAgent>();
+        _anim = GetComponent<Animator>();
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Move");
     }
 
@@ -33,9 +35,7 @@ public class Attacker : UdonSharpBehaviour
         {
             if (Vector3.Distance(gameObject.transform.position, door.position) <= 3) //Distance fixed for prototyping, should be changed to agent.stoppingdistance
             {
-                door.gameObject.GetComponent<CastleDoor>().TakingDamage(100);
-                _agent.destination = transform.position;
-                _movingSound.Stop();
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "AttackDoor");
                 _isRange = true;
             }
         }
@@ -46,6 +46,15 @@ public class Attacker : UdonSharpBehaviour
     {
         _agent.destination = door.position;
         _movingSound.Play();
+    }
+
+    //The knight attacks the door when in range.
+    public void AttackDoor()
+    {
+        _anim.SetBool("IsAttacking", true);
+        door.gameObject.GetComponent<CastleDoor>().TakingDamage(100);
+        _agent.destination = transform.position;
+        _movingSound.Stop();
     }
 
     //Called when the attacker is taking damaged.
