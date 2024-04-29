@@ -51,7 +51,7 @@ public class Attacker : UdonSharpBehaviour
     //The knight attacks the door when in range.
     public void AttackDoor()
     {
-        _anim.SetBool("IsAttacking", true);
+        _anim.SetInteger("CurrentState", 1);
         door.gameObject.GetComponent<CastleDoor>().TakingDamage(100);
         _agent.destination = transform.position;
         _movingSound.Stop();
@@ -63,6 +63,8 @@ public class Attacker : UdonSharpBehaviour
         _health -= damage;
         _damagedSound.Play();
 
+        _anim.SetBool("IsHit", true);
+
         if (_health <= 0)
         {
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Dying");
@@ -73,8 +75,9 @@ public class Attacker : UdonSharpBehaviour
     public void Dying()
     {
         _movingSound.Stop();
-        //_dyingSound.Play(); //To decomment when dying animation.
-        gameObject.SetActive(false);
+        _dyingSound.Play(); //To decomment when dying animation.
+        //gameObject.SetActive(false);
+        _anim.SetInteger("CurrentState", 3);
         _agent.destination = transform.position;
     }
 }
