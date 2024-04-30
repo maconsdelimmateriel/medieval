@@ -10,7 +10,7 @@ public class Attacker : UdonSharpBehaviour
     public Transform door; //Position of the castle door.
     private NavMeshAgent _agent; //NavMeshAgent of the attacker.
     [SerializeField]
-    private int _health = 14; //Health of the attacker.
+    private int _health = 6; //Health of the attacker.
     private bool _isRange = false; //Is the attacker in front of the door?
     [SerializeField]
     private AudioSource _movingSound; //Sound played when knight is moving.
@@ -63,7 +63,7 @@ public class Attacker : UdonSharpBehaviour
         _health -= damage;
         _damagedSound.Play();
 
-        _anim.SetBool("IsHit", true);
+        _anim.SetTrigger("Hit");
 
         if (_health <= 0)
         {
