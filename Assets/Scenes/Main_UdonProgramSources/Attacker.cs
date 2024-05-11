@@ -19,6 +19,7 @@ public class Attacker : UdonSharpBehaviour
     [SerializeField]
     private AudioSource _damagedSound; //Sound played when the knight takes damage.
     private Animator _anim; //Animator controller of the knight.
+    private bool _isDead = false; //Is the knight dead?
 
     private void OnEnable()
     {
@@ -52,7 +53,7 @@ public class Attacker : UdonSharpBehaviour
     public void AttackDoor()
     {
         _anim.SetInteger("CurrentState", 1);
-        door.gameObject.GetComponent<CastleDoor>().TakingDamage(100);
+        door.gameObject.GetComponent<CastleDoor>().TakingDamage(0);
         _agent.destination = transform.position;
         _movingSound.Stop();
     }
@@ -60,14 +61,17 @@ public class Attacker : UdonSharpBehaviour
     //Called when the attacker is taking damaged.
     public void TakingDamage(int damage)
     {
-        _health -= damage;
-        _damagedSound.Play();
-
-        _anim.SetTrigger("Hit");
-
-        if (_health <= 0)
+        if (!_isDead)
         {
-            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Dying");
+            _health -= damage;
+            _damagedSound.Play();
+
+            _anim.SetTrigger("Hit");
+
+            if (_health <= 0)
+            {
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Dying");
+            }
         }
     }
 
@@ -75,9 +79,9 @@ public class Attacker : UdonSharpBehaviour
     public void Dying()
     {
         _movingSound.Stop();
-        _dyingSound.Play(); //To decomment when dying animation.
-        //gameObject.SetActive(false);
+        _dyingSound.Play(); 
         _anim.SetInteger("CurrentState", 3);
         _agent.destination = transform.position;
+        _isDead = true;
     }
 }
