@@ -25,13 +25,6 @@ public class SpawnAttackers : UdonSharpBehaviour
     {
         _startSound.Play();
 
-        /*foreach (Transform spawnPoint in _spawnPoints)
-        {
-            
-            GameObject attacker = Instantiate(_knightPrefab, spawnPoint.position, spawnPoint.rotation);
-            attacker.GetComponent<Attacker>().door = _door;
-        }*/
-
         for (int i = 0; i < _spawnPoints.Length; i++)
         {
             _knights[i].transform.position = _spawnPoints[i].position;

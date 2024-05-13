@@ -4,6 +4,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 using UnityEngine.AI;
+using System.Collections;
 
 public class Attacker : UdonSharpBehaviour
 {
@@ -20,6 +21,10 @@ public class Attacker : UdonSharpBehaviour
     private AudioSource _damagedSound; //Sound played when the knight takes damage.
     private Animator _anim; //Animator controller of the knight.
     private bool _isDead = false; //Is the knight dead?
+    private bool isCoroutineRunning = true;
+    private float timer = 0f;
+    private float duration = 6f; // Adjust as needed
+    private float tickInterval = 1f; // Adjust as needed
 
     private void OnEnable()
     {
@@ -36,8 +41,25 @@ public class Attacker : UdonSharpBehaviour
         {
             if (Vector3.Distance(gameObject.transform.position, door.position) <= 3) //Distance fixed for prototyping, should be changed to agent.stoppingdistance
             {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "AttackDoor");
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Idle");
                 _isRange = true;
+            }
+        }
+
+        // Check if your "coroutine" is running
+        if (isCoroutineRunning && _isRange)
+        {
+            // Update the timer
+            timer += Time.deltaTime;
+
+            // Check if the timer exceeds the duration
+            if (timer >= duration)
+            {
+                // Perform actions here
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "AttackDoor");
+
+                // Reset timer
+                timer = 0f;
             }
         }
     }
@@ -49,13 +71,27 @@ public class Attacker : UdonSharpBehaviour
         _movingSound.Play();
     }
 
-    //The knight attacks the door when in range.
-    public void AttackDoor()
+    //Knight gets in idle position when reaching door.
+    public void Idle()
     {
         _anim.SetInteger("CurrentState", 1);
-        door.gameObject.GetComponent<CastleDoor>().TakingDamage(0);
         _agent.destination = transform.position;
         _movingSound.Stop();
+    }
+
+    //One attack against the door.
+    public void AttackDoor()
+    {
+        door.gameObject.GetComponent<CastleDoor>().TakingDamage(1);
+        _anim.SetTrigger("AttackDoor");
+        StartCoroutineReplacement();
+        Debug.Log("yay");
+    }
+
+    void StartCoroutineReplacement()
+    {
+        // Set flag to indicate the "coroutine" is running
+        isCoroutineRunning = true;
     }
 
     //Called when the attacker is taking damaged.
