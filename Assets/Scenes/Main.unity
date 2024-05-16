@@ -143,6 +143,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 346136386}
     m_Modifications:
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 179330497}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
     - target: {fileID: 1995276570433800444, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: door
@@ -219,6 +230,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7843335778110035619, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 7843335778110035619, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3711,6 +3728,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 346136386}
     m_Modifications:
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 179330497}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
     - target: {fileID: 1995276570433800444, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: door
@@ -3787,6 +3815,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7843335778110035619, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 7843335778110035619, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12349,6 +12383,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 346136386}
     m_Modifications:
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 179330497}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
     - target: {fileID: 1995276570433800444, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: door
@@ -12425,6 +12470,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7843335778110035619, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 7843335778110035619, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14416,6 +14467,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 346136386}
     m_Modifications:
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 179330497}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
     - target: {fileID: 1995276570433800444, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: door
@@ -14487,6 +14549,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7843335778110035619, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 7843335778110035619, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25305,6 +25373,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 346136386}
     m_Modifications:
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 179330497}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
     - target: {fileID: 1995276570433800444, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: door
@@ -25376,6 +25455,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7843335778110035619, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 7843335778110035619, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -18,13 +18,14 @@ public class Attacker : UdonSharpBehaviour
     [SerializeField]
     private AudioSource _dyingSound; //Sound played when the knight dies.
     [SerializeField]
+    private AudioSource _attackingSound; //Sound played when the knight attacks the door.
+    [SerializeField]
     private AudioSource _damagedSound; //Sound played when the knight takes damage.
     private Animator _anim; //Animator controller of the knight.
     private bool _isDead = false; //Is the knight dead?
     private bool isCoroutineRunning = true;
     private float timer = 0f;
-    private float duration = 6f; // Adjust as needed
-    private float tickInterval = 1f; // Adjust as needed
+    private float duration = 6f; // Time between attacks
 
     private void OnEnable()
     {
@@ -83,6 +84,7 @@ public class Attacker : UdonSharpBehaviour
     public void AttackDoor()
     {
         door.gameObject.GetComponent<CastleDoor>().TakingDamage(1);
+        _attackingSound.Play();
         _anim.SetTrigger("AttackDoor");
         StartCoroutineReplacement();
         Debug.Log("yay");
