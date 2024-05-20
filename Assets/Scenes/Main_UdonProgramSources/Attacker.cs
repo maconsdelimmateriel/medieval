@@ -12,6 +12,7 @@ public class Attacker : UdonSharpBehaviour
     private NavMeshAgent _agent; //NavMeshAgent of the attacker.
     [SerializeField]
     private int _health = 6; //Health of the attacker.
+    private int _initialHealth;
     private bool _isRange = false; //Is the attacker in front of the door?
     [SerializeField]
     private AudioSource _movingSound; //Sound played when knight is moving.
@@ -33,6 +34,7 @@ public class Attacker : UdonSharpBehaviour
 
         _agent = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
+        _initialHealth = _health;
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Move");
     }
 
@@ -121,5 +123,21 @@ public class Attacker : UdonSharpBehaviour
         _anim.SetInteger("CurrentState", 3);
         _agent.destination = transform.position;
         _isDead = true;
+    }
+
+    // Reset the attacker's state
+    public void ResetAttacker()
+    {
+        _health = _initialHealth;
+        _isRange = false;
+        _isDead = false;
+        //isCoroutineRunning = false;
+        timer = 0f;
+        _agent = GetComponent<NavMeshAgent>();
+        _anim = GetComponent<Animator>();
+        _agent.enabled = true;
+        //_agent.destination = door.position;
+        _anim.SetInteger("CurrentState", 0);
+        gameObject.SetActive(false);
     }
 }

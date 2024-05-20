@@ -14,10 +14,30 @@ public class SpawnAttackers : UdonSharpBehaviour
     private GameObject[] _knights; //Pool of knights for wave.
     [SerializeField]
     private AudioSource _startSound; //Sound played at the beginning of a wave.
-    
+    [SerializeField]
+    private CastleDoor _castleDoor; // Reference to the castle door.
+
+
     public override void Interact()
     {
-        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Spawn");
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetAndSpawn");
+    }
+
+    // Method to reset and spawn attackers
+    public void ResetAndSpawn()
+    {
+        _castleDoor.ResetDoor();
+
+        foreach (GameObject knight in _knights)
+        {
+            Attacker attacker = knight.GetComponent<Attacker>();
+            if (attacker != null)
+            {
+                attacker.ResetAttacker();
+            }
+        }
+
+        Spawn();
     }
 
     // Instantiating attackers on each spawn point. Object pooling should be used here in the future.
