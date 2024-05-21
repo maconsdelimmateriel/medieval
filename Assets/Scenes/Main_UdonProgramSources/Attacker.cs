@@ -25,8 +25,19 @@ public class Attacker : UdonSharpBehaviour
     private Animator _anim; //Animator controller of the knight.
     private bool _isDead = false; //Is the knight dead?
     private bool isCoroutineRunning = true;
-    private float timer = 0f;
-    private float duration = 6f; // Time between attacks
+    private float _timer = 0f; //A timer that updates the behavior of the knight.
+    private float _durationAttacks = 6f; // Time between attacks.
+    private float _durationWalks = 2f; //Time between changing locomotion.
+    private float _initialSpeed; //Walking speed.
+
+    /*Current state values:
+     * 0 Walking
+     * 1 Idling after door reached
+     * 2 Attacking door
+     * 3 Dead
+     * 4 Running
+     * 5 Idling with shield up
+     */
 
     private void OnEnable()
     {
@@ -35,6 +46,7 @@ public class Attacker : UdonSharpBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
         _initialHealth = _health;
+        _initialSpeed = _agent.speed;
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Move");
     }
 
@@ -49,21 +61,27 @@ public class Attacker : UdonSharpBehaviour
             }
         }
 
-        // Check if your "coroutine" is running
-        if (isCoroutineRunning && _isRange)
+        if (isCoroutineRunning)
         {
-            // Update the timer
-            timer += Time.deltaTime;
+            _timer += Time.deltaTime;
 
-            // Check if the timer exceeds the duration
-            if (timer >= duration)
+            if (_isRange) //Updating behavior when in range with door.
             {
-                // Perform actions here
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "AttackDoor");
-
-                // Reset timer
-                timer = 0f;
+                if (_timer >= _durationAttacks)
+                {
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "AttackDoor");
+                    _timer = 0f;
+                }
             }
+            else //Updating behavior when not in range with door.
+            {
+                if (_timer >= _durationWalks)
+                {
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "BlockOrRun");
+                    _timer = 0f;
+                }
+            }
+            
         }
     }
 
@@ -72,6 +90,33 @@ public class Attacker : UdonSharpBehaviour
     {
         _agent.destination = door.position;
         _movingSound.Play();
+    }
+
+    //The attacker randomly chooses between running or blocking.
+    public void BlockOrRun()
+    {
+        int currentStateValue = _anim.GetInteger("CurrentState");
+
+        if(currentStateValue == 0)
+        {
+            int flip = Random.Range(0, 2);
+
+            if (flip == 0) //Running
+            {
+                _anim.SetInteger("CurrentState", 4);
+                _agent.speed *= 2f;
+            }
+            else //Blocking
+            {
+                _anim.SetInteger("CurrentState", 5);
+                _agent.speed = 0f;
+            }
+        }
+        else //Walking
+        {
+            _anim.SetInteger("CurrentState", 0);
+            _agent.speed = _initialSpeed;
+        }
     }
 
     //Knight gets in idle position when reaching door.
@@ -88,8 +133,8 @@ public class Attacker : UdonSharpBehaviour
         door.gameObject.GetComponent<CastleDoor>().TakingDamage(1);
         _attackingSound.Play();
         _anim.SetTrigger("AttackDoor");
+        _anim.SetInteger("CurrentState", 2);
         StartCoroutineReplacement();
-        Debug.Log("yay");
     }
 
     void StartCoroutineReplacement()
@@ -132,7 +177,7 @@ public class Attacker : UdonSharpBehaviour
         _isRange = false;
         _isDead = false;
         //isCoroutineRunning = false;
-        timer = 0f;
+        _timer = 0f;
         _agent = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
         _agent.enabled = true;
