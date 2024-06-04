@@ -69,7 +69,9 @@ public class Attacker : UdonSharpBehaviour
             {
                 if (_timer >= _durationAttacks)
                 {
-                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "AttackDoor");
+                    if(door.gameObject.GetComponent<CastleDoor>().DoodModel.activeInHierarchy) 
+                        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "AttackDoor");
+                    
                     _timer = 0f;
                 }
             }

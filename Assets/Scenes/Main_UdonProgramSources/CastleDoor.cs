@@ -10,8 +10,15 @@ public class CastleDoor : UdonSharpBehaviour
     [SerializeField]
     private int _health = 30; //Health of the door.
     private int _initialHealth;
+
     [SerializeField]
-    private GameObject _doorModel; //The 3D model of the castle door and its collider.
+    private GameObject _doorModel;  //The 3D model of the castle door and its collider.
+
+    public GameObject DoodModel
+    {
+        get { return _doorModel; }
+    }
+    
     [SerializeField]
     private AudioSource _destroyedSound; //Sound played when door is destroyed.
     private bool _isDestroyed = false; //Is the door destroyed?
@@ -25,7 +32,6 @@ public class CastleDoor : UdonSharpBehaviour
     public void TakingDamage(int damage)
     {
         _health -= damage;
-        Debug.Log("damage");
 
         if (_health <= 0 && !_isDestroyed)
         {
