@@ -24,10 +24,14 @@ public class Arrow : UdonSharpBehaviour
     [SerializeField]
     private AudioSource _impactSound; //Sound played on impact.
 
+    [SerializeField]
+    private float _disparitionDelay = 5f; //Time after which the shot arrows disappear.
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _vrcPickup = GetComponent<VRCPickup>();
+        Destroy(gameObject, _disparitionDelay);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -58,7 +62,7 @@ public class Arrow : UdonSharpBehaviour
                 break;
             }
 
-        //Arrow checks if object his is taking damaged.
+        //Arrow checks if object hit is taking damage.
         if (collision.gameObject.GetComponent<Attacker>() != null)
         {
             Attacker attacker = collision.gameObject.GetComponent<Attacker>();
