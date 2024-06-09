@@ -52,7 +52,7 @@ public class Arrow : UdonSharpBehaviour
         //if (collision.impulse.magnitude < 20f)
         //    return;
             // When the arrow enters collision, we check if it should plant into the collider.
-            foreach (ContactPoint contact in collision.contacts)
+            /*foreach (ContactPoint contact in collision.contacts)
             {
                 // The arrow should only plant in items on frontal collisions.
                 //if (Vector3.Dot(contact.normal, transform.forward) > -0.5f)
@@ -60,7 +60,7 @@ public class Arrow : UdonSharpBehaviour
 
                 PlantArrow(collision.impulse.magnitude, collision.rigidbody.transform);
                 break;
-            }
+            }*/ //To decomment after testing
 
         //Arrow checks if object hit is taking damage.
         if (collision.gameObject.GetComponent<Attacker>() != null)
@@ -72,7 +72,7 @@ public class Arrow : UdonSharpBehaviour
         this.gameObject.GetComponent<Collider>().enabled = false;
     }
 
-    public override void OnPickup()
+    /*public override void OnPickup()
     {
         base.OnPickup();
 
@@ -85,12 +85,12 @@ public class Arrow : UdonSharpBehaviour
         base.OnDrop();
 
         _isPickedUp = false;
-    }
+    }*/
 
     private void PlantArrow(float force, Transform target)
     {
-        if (_isPickedUp)
-            _vrcPickup.Drop();
+        /*if (_isPickedUp)
+            _vrcPickup.Drop();*/
 
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;

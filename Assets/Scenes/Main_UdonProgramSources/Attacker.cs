@@ -34,7 +34,6 @@ public class Attacker : UdonSharpBehaviour
      * 0 Walking
      * 1 Idling after door reached
      * 2 Attacking door
-     * 3 Dead
      * 4 Running
      * 5 Idling with shield up
      */
@@ -52,38 +51,41 @@ public class Attacker : UdonSharpBehaviour
 
     private void Update()
     {
-        if (!_isRange)
+        if (!_isDead)
         {
-            if (Vector3.Distance(gameObject.transform.position, door.position) <= 3) //Distance fixed for prototyping, should be changed to agent.stoppingdistance
+            if (!_isRange)
             {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Idle");
-                _isRange = true;
-            }
-        }
-
-        if (isCoroutineRunning)
-        {
-            _timer += Time.deltaTime;
-
-            if (_isRange) //Updating behavior when in range with door.
-            {
-                if (_timer >= _durationAttacks)
+                if (Vector3.Distance(gameObject.transform.position, door.position) <= 3) //Distance fixed for prototyping, should be changed to agent.stoppingdistance
                 {
-                    if(door.gameObject.GetComponent<CastleDoor>().DoodModel.activeInHierarchy) 
-                        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "AttackDoor");
-                    
-                    _timer = 0f;
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Idle");
+                    _isRange = true;
                 }
             }
-            else //Updating behavior when not in range with door.
+
+            if (isCoroutineRunning)
             {
-                if (_timer >= _durationWalks)
+                _timer += Time.deltaTime;
+
+                if (_isRange) //Updating behavior when in range with door.
                 {
-                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "BlockOrRun");
-                    _timer = 0f;
+                    if (_timer >= _durationAttacks)
+                    {
+                        if (door.gameObject.GetComponent<CastleDoor>().DoodModel.activeInHierarchy)
+                            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "AttackDoor");
+
+                        _timer = 0f;
+                    }
                 }
+                else //Updating behavior when not in range with door.
+                {
+                    if (_timer >= _durationWalks)
+                    {
+                        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "BlockOrRun");
+                        _timer = 0f;
+                    }
+                }
+
             }
-            
         }
     }
 
@@ -97,6 +99,9 @@ public class Attacker : UdonSharpBehaviour
     //The attacker randomly chooses between running or blocking.
     public void BlockOrRun()
     {
+        if (_isDead)
+            return;
+
         int currentStateValue = _anim.GetInteger("CurrentState");
 
         if(currentStateValue == 0)
@@ -165,9 +170,12 @@ public class Attacker : UdonSharpBehaviour
     //Called when the attacker dies.
     public void Dying()
     {
+        if (_isDead)
+            return;
+
         _movingSound.Stop();
         _dyingSound.Play(); 
-        _anim.SetInteger("CurrentState", 3);
+        _anim.SetBool("IsDead", true);
         _agent.destination = transform.position;
         _isDead = true;
     }
@@ -184,6 +192,7 @@ public class Attacker : UdonSharpBehaviour
         _anim = GetComponent<Animator>();
         _agent.enabled = true;
         //_agent.destination = door.position;
+        _anim.SetBool("IsDeath", false);
         _anim.SetInteger("CurrentState", 0);
         gameObject.SetActive(false);
     }
