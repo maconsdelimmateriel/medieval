@@ -185,13 +185,15 @@ public class Attacker : UdonSharpBehaviour
     {
         _health = _initialHealth;
         _isRange = false;
-        _isDead = false;
         //isCoroutineRunning = false;
         _timer = 0f;
         _agent = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
         _agent.enabled = true;
+        _isDead = true;
+        _isDead = false;
         //_agent.destination = door.position;
+        _anim.SetBool("IsDeath", true);
         _anim.SetBool("IsDeath", false);
         _anim.SetInteger("CurrentState", 0);
         gameObject.SetActive(false);
