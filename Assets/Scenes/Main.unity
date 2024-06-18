@@ -150,6 +150,11 @@ PrefabInstance:
       objectReference: {fileID: 179330497}
     - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
+      propertyPath: _spawn
+      value: 
+      objectReference: {fileID: 69451806}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
@@ -751,9 +756,9 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 69451805}
   _spawnPoints:
-  - {fileID: 421135503}
-  - {fileID: 249463056}
   - {fileID: 2090580007}
+  - {fileID: 249463056}
+  - {fileID: 421135503}
   - {fileID: 765763178}
   - {fileID: 1789902734}
   _knights:
@@ -764,6 +769,8 @@ MonoBehaviour:
   - {fileID: 4530082}
   _startSound: {fileID: 69451807}
   _castleDoor: {fileID: 179330499}
+  _knightPrefab: {fileID: 5508943889512239723, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+    type: 3}
 --- !u!82 &69451807
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3962,6 +3969,11 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 179330497}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: _spawn
+      value: 
+      objectReference: {fileID: 69451806}
     - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -12717,6 +12729,11 @@ PrefabInstance:
       objectReference: {fileID: 179330497}
     - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
+      propertyPath: _spawn
+      value: 
+      objectReference: {fileID: 69451806}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
@@ -14425,6 +14442,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1261292763863848965, guid: 308522c7430503a4b911b6b9270d991b,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261292763863848965, guid: 308522c7430503a4b911b6b9270d991b,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -14941,6 +14963,11 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 179330497}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: _spawn
+      value: 
+      objectReference: {fileID: 69451806}
     - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -26666,6 +26693,11 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 179330497}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: _spawn
+      value: 
+      objectReference: {fileID: 69451806}
     - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: serializationData.Prefab

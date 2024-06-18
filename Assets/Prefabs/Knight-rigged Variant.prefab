@@ -86,7 +86,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: af31440194279964ca49ca9cbc531523,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1630794972795428178, guid: af31440194279964ca49ca9cbc531523,
         type: 3}
@@ -557,6 +557,7 @@ MonoBehaviour:
   _dyingSound: {fileID: 4889679756644082240}
   _attackingSound: {fileID: 5821260789990797826}
   _damagedSound: {fileID: 4889679756644082240}
+  _spawn: {fileID: 0}
 --- !u!114 &3696051639321539438
 MonoBehaviour:
   m_ObjectHideFlags: 0

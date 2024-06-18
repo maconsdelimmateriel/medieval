@@ -16,6 +16,8 @@ public class SpawnAttackers : UdonSharpBehaviour
     private AudioSource _startSound; //Sound played at the beginning of a wave.
     [SerializeField]
     private CastleDoor _castleDoor; // Reference to the castle door.
+    [SerializeField]
+    private GameObject _knightPrefab;
 
 
     public override void Interact()
@@ -47,8 +49,16 @@ public class SpawnAttackers : UdonSharpBehaviour
 
         for (int i = 0; i < _spawnPoints.Length; i++)
         {
-            _knights[i].transform.position = _spawnPoints[i].position;
-            _knights[i].SetActive(true);
+            //_knights[i].transform.position = _spawnPoints[i].position;
+            //_knights[i].SetActive(true);
+
+            GameObject knight = (GameObject)Instantiate(_knightPrefab, _spawnPoints[i].position, _spawnPoints[i].rotation);
+            Attacker knightScript = knight.GetComponent<Attacker>();
+            knightScript.door = _castleDoor.transform;
+            knightScript._spawn = this;
         }
     }
+
+
+
 }

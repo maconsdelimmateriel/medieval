@@ -29,6 +29,11 @@ public class Attacker : UdonSharpBehaviour
     private float _durationAttacks = 6f; // Time between attacks.
     private float _durationWalks = 2f; //Time between changing locomotion.
     private float _initialSpeed; //Walking speed.
+    private Vector3 _lastPosition; // Last known position to check movement.
+    private float _checkMovementInterval = 1f; // Interval to check movement.
+    private float _timeSinceLastCheck = 0f; // Time since the last movement check.
+    [SerializeField]
+    public SpawnAttackers _spawn;
 
     /*Current state values:
      * 0 Walking
@@ -65,6 +70,13 @@ public class Attacker : UdonSharpBehaviour
             if (isCoroutineRunning)
             {
                 _timer += Time.deltaTime;
+                _timeSinceLastCheck += Time.deltaTime;
+
+                // Check if the attacker is moving every _checkMovementInterval seconds
+                if (_timeSinceLastCheck >= _checkMovementInterval)
+                {
+                    //CheckMovement();
+                }
 
                 if (_isRange) //Updating behavior when in range with door.
                 {
@@ -197,5 +209,16 @@ public class Attacker : UdonSharpBehaviour
         _anim.SetBool("IsDeath", false);
         _anim.SetInteger("CurrentState", 0);
         gameObject.SetActive(false);
+    }
+
+    private void CheckMovement()
+    {
+        Debug.Log("check1");
+        if (Vector3.Distance(_lastPosition, transform.position) < 1f)
+        {
+            Debug.Log("check2");
+            _spawn.Interact();
+            Debug.Log("check3");
+        }
     }
 }
