@@ -48,8 +48,10 @@ public class Attacker : UdonSharpBehaviour
         //_door = GameObject.Find("Door").transform; //Finding by tag or component not handled by Udonsharp? Need to find better ways to find objects.
 
         _agent = GetComponent<NavMeshAgent>();
+        _agent.enabled = true;
         _anim = GetComponent<Animator>();
         _initialHealth = _health;
+        _agent.speed = 4f;
         _initialSpeed = _agent.speed;
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Move");
     }

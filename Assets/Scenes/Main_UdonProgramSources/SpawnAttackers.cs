@@ -1,5 +1,4 @@
-﻿
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -49,16 +48,13 @@ public class SpawnAttackers : UdonSharpBehaviour
 
         for (int i = 0; i < _spawnPoints.Length; i++)
         {
-            //_knights[i].transform.position = _spawnPoints[i].position;
-            //_knights[i].SetActive(true);
+            _knights[i].transform.position = _spawnPoints[i].position;
+            _knights[i].SetActive(true);
 
-            GameObject knight = (GameObject)Instantiate(_knightPrefab, _spawnPoints[i].position, _spawnPoints[i].rotation);
+            /*GameObject knight = (GameObject)Instantiate(_knightPrefab, _spawnPoints[i].position, _spawnPoints[i].rotation);
             Attacker knightScript = knight.GetComponent<Attacker>();
             knightScript.door = _castleDoor.transform;
-            knightScript._spawn = this;
+            knightScript._spawn = this;*/
         }
     }
-
-
-
 }
