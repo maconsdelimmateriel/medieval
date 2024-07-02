@@ -135,6 +135,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1027944726}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &4530090 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4379576737111209088, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1027944726}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7918553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,6 +159,11 @@ PrefabInstance:
       propertyPath: _spawn
       value: 
       objectReference: {fileID: 69451806}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 602881385}
     - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -3976,6 +3987,11 @@ PrefabInstance:
       objectReference: {fileID: 69451806}
     - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 814967904}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
@@ -4076,6 +4092,12 @@ GameObject:
 --- !u!4 &602881378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5131961637420386513, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 7918553}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &602881385 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4379576737111209088, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
     type: 3}
   m_PrefabInstance: {fileID: 7918553}
   m_PrefabAsset: {fileID: 0}
@@ -6252,8 +6274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Objects: []
   buildInfo:
-    CachedBuildTarget: 19
-    NewBuildTarget: 19
+    CachedBuildTarget: 13
+    NewBuildTarget: 13
 --- !u!4 &796625875
 Transform:
   m_ObjectHideFlags: 1
@@ -6467,6 +6489,12 @@ GameObject:
 --- !u!4 &814967897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5131961637420386513, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 602143017}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &814967904 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4379576737111209088, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
     type: 3}
   m_PrefabInstance: {fileID: 602143017}
   m_PrefabAsset: {fileID: 0}
@@ -12108,6 +12136,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8818264741466491266}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &924378317 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4379576737111209088, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 8818264741466491266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &951894770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12732,6 +12766,11 @@ PrefabInstance:
       propertyPath: _spawn
       value: 
       objectReference: {fileID: 69451806}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 4530090}
     - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -14968,6 +15007,11 @@ PrefabInstance:
       propertyPath: _spawn
       value: 
       objectReference: {fileID: 69451806}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 1753993812}
     - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -17783,6 +17827,12 @@ GameObject:
 --- !u!4 &1753993805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5131961637420386513, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1415306359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1753993812 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4379576737111209088, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
     type: 3}
   m_PrefabInstance: {fileID: 1415306359}
   m_PrefabAsset: {fileID: 0}
@@ -26698,6 +26748,11 @@ PrefabInstance:
       propertyPath: _spawn
       value: 
       objectReference: {fileID: 69451806}
+    - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
+        type: 3}
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 924378317}
     - target: {fileID: 1587368258242475443, guid: 12c4f3fbb2fa40f478ff1d7509fb20aa,
         type: 3}
       propertyPath: serializationData.Prefab

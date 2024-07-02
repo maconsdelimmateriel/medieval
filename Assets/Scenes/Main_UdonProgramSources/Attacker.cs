@@ -34,6 +34,8 @@ public class Attacker : UdonSharpBehaviour
     private float _timeSinceLastCheck = 0f; // Time since the last movement check.
     [SerializeField]
     public SpawnAttackers _spawn;
+    [SerializeField]
+    private Collider _collider;
 
     /*Current state values:
      * 0 Walking
@@ -191,6 +193,7 @@ public class Attacker : UdonSharpBehaviour
         _dyingSound.Play(); 
         _anim.SetBool("IsDead", true);
         _agent.destination = transform.position;
+        _collider.enabled = false;
         _isDead = true;
     }
 
@@ -210,6 +213,7 @@ public class Attacker : UdonSharpBehaviour
         _anim.SetBool("IsDeath", true);
         _anim.SetBool("IsDeath", false);
         _anim.SetInteger("CurrentState", 0);
+        _collider.enabled = true;
         gameObject.SetActive(false);
     }
 
