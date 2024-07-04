@@ -31,7 +31,7 @@ public class Arrow : UdonSharpBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _vrcPickup = GetComponent<VRCPickup>();
-        Destroy(gameObject, _disparitionDelay);
+        //Destroy(gameObject, _disparitionDelay);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -67,6 +67,11 @@ public class Arrow : UdonSharpBehaviour
         {
             Attacker attacker = collision.gameObject.GetComponent<Attacker>();
             attacker.TakingDamage(_damage);
+        }
+        else if (collision.gameObject.name == "Ground") //Using name because tags not exposed to Udon yet.
+        {
+            Debug.Log("destr");
+            Destroy(gameObject);
         }
 
         this.gameObject.GetComponent<Collider>().enabled = false;
