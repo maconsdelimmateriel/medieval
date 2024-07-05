@@ -31,7 +31,7 @@ public class Arrow : UdonSharpBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _vrcPickup = GetComponent<VRCPickup>();
-        //Destroy(gameObject, _disparitionDelay);
+        Destroy(gameObject, _disparitionDelay);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -66,16 +66,19 @@ public class Arrow : UdonSharpBehaviour
         if (collision.gameObject.GetComponent<Attacker>() != null)
         {
             Attacker attacker = collision.gameObject.GetComponent<Attacker>();
-            attacker.TakingDamage(_damage);
+            attacker.SetProgramVariable("damage", _damage);
+            //attacker.OnReceiveDamage(_damage);
+            attacker.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "OnReceiveDamage");
         }
         else if (collision.gameObject.name == "Ground") //Using name because tags not exposed to Udon yet.
         {
-            Debug.Log("destr");
             Destroy(gameObject);
         }
 
         this.gameObject.GetComponent<Collider>().enabled = false;
     }
+
+   
 
     /*public override void OnPickup()
     {

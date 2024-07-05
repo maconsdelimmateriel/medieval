@@ -33,9 +33,10 @@ public class Attacker : UdonSharpBehaviour
     private float _checkMovementInterval = 1f; // Interval to check movement.
     private float _timeSinceLastCheck = 0f; // Time since the last movement check.
     [SerializeField]
-    public SpawnAttackers _spawn;
+    public SpawnAttackers _spawn; //Reference to the spawn script of the attackers.
     [SerializeField]
-    private Collider _collider;
+    private Collider _collider; //Reference to the collider of this attacker.
+    public int damage; //Damage amount sent over the network when hit.
 
     /*Current state values:
      * 0 Walking
@@ -167,8 +168,10 @@ public class Attacker : UdonSharpBehaviour
     }
 
     //Called when the attacker is taking damaged.
-    public void TakingDamage(int damage)
+    public void OnReceiveDamage()
     {
+        damage = (int)GetProgramVariable("damage");
+
         if (!_isDead)
         {
             _health -= damage;
@@ -219,12 +222,9 @@ public class Attacker : UdonSharpBehaviour
 
     private void CheckMovement()
     {
-        Debug.Log("check1");
         if (Vector3.Distance(_lastPosition, transform.position) < 1f)
         {
-            Debug.Log("check2");
             _spawn.Interact();
-            Debug.Log("check3");
         }
     }
 }
