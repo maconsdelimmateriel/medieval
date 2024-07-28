@@ -379,7 +379,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A propos de l'association et de ses membres WIP
+  m_text: "Les Ma\xE7ons de l'Immat\xE9riel\r\n\r\nLes Ma\xE7ons de l'Immat\xE9riel
+    est une association \xE0 but non lucrative Fran\xE7aise dont le but est de cr\xE9er
+    des mondes virtuels.\r\n\r\nCatherine Lomako\_: Product Owner\r\nRomane Rakotovao\_:
+    Game Designer\r\nAntoine Rigitano\_: Pr\xE9sident de l'association & D\xE9veloppeur\r\nNiccol\xF2
+    Scardino\_: Environment Artist\r\n\r\nContributeurs\_:\r\nDamien Doury\r\nNicolas
+    Knopf\r\nRouffi\r\nL\xE9onor Tourneboeuf"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -413,7 +418,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -442,7 +447,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -11.704687, y: 0, z: 0, w: 0}
+  m_margin: {x: -11.704687, y: 0, z: 0.45806694, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -509,8 +514,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16, y: 8.543}
-  m_SizeDelta: {x: 4.2818, y: 0.5939}
+  m_AnchoredPosition: {x: 23, y: 9.2}
+  m_SizeDelta: {x: -8.8, y: 2.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &60536164 stripped
 Transform:
