@@ -37,6 +37,7 @@ public class Attacker : UdonSharpBehaviour
     [SerializeField]
     private Collider _collider; //Reference to the collider of this attacker.
     public int damage; //Damage amount sent over the network when hit.
+    private bool _isBlocking = false; //Bool to see if the knight can take damages or not.
 
     /*Current state values:
      * 0 Walking
@@ -123,23 +124,26 @@ public class Attacker : UdonSharpBehaviour
 
         if(currentStateValue == 0)
         {
-            int flip = Random.Range(0, 2);
+            int flip = Random.Range(0, 4);
 
             if (flip == 0) //Running
             {
                 _anim.SetInteger("CurrentState", 4);
                 _agent.speed *= 2f;
+                _isBlocking = false;
             }
             else //Blocking
             {
                 _anim.SetInteger("CurrentState", 5);
                 _agent.speed = 0f;
+                _isBlocking = true;
             }
         }
         else //Walking
         {
             _anim.SetInteger("CurrentState", 0);
             _agent.speed = _initialSpeed;
+            _isBlocking = false;
         }
     }
 
@@ -172,7 +176,7 @@ public class Attacker : UdonSharpBehaviour
     {
         damage = (int)GetProgramVariable("damage");
 
-        if (!_isDead)
+        if (!_isDead && !_isBlocking)
         {
             _health -= damage;
             _damagedSound.Play();
