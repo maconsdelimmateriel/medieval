@@ -12,6 +12,9 @@ public class LongBow : UdonSharpBehaviour
     private AudioSource _preparingSound; //Sound played when grabbing the bow.
     [SerializeField]
     private AudioSource _shootSound; //Sound played when shooting.
+    [SerializeField]
+    private AudioSource _failSound; //Sound telling the player they can't shoot if they are not on the wall.
+    private float _mintHeight = 5f; //The minimum height at which the player can shoot.
 
     private Collider[] _bowColliders = null; // All colliders on the bow gameObject and its children.
 
@@ -31,26 +34,36 @@ public class LongBow : UdonSharpBehaviour
     {
         base.OnPickupUseDown();
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Shoot");
-        _shootSound.Play();
     }
 
     //The bow shoots an arrow when trigger is pressed.
     public void Shoot()
     {
-        // Instantiating the arrow. Object pooling should be used here in the future.
-        GameObject arrow = Instantiate(_arrowPrefab, this.transform.position, this.transform.rotation);
+        if (gameObject.transform.position.y >= _mintHeight)
+        {
 
-        // Making sure the arrow won't collide with the bow by removing collisions between them.
-        Collider arrowCollider = arrow.GetComponentInChildren<Collider>(true);
-        if (arrowCollider != null && _bowColliders != null)
-            foreach (Collider coll in _bowColliders)
-                Physics.IgnoreCollision(coll, arrowCollider);
+            // Instantiating the arrow. Object pooling should be used here in the future.
+            GameObject arrow = Instantiate(_arrowPrefab, this.transform.position, this.transform.rotation);
+            _shootSound.Play();
 
-        // Activating the arrow.
-        arrow.SetActive(true);
+            // Making sure the arrow won't collide with the bow by removing collisions between them.
+            Collider arrowCollider = arrow.GetComponentInChildren<Collider>(true);
+            if (arrowCollider != null && _bowColliders != null)
+                foreach (Collider coll in _bowColliders)
+                    Physics.IgnoreCollision(coll, arrowCollider);
 
-        // Shooting the arrow.
-        Rigidbody rb = arrow.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * _shootStrength);
+            // Activating the arrow.
+            arrow.SetActive(true);
+
+            // Shooting the arrow.
+            Rigidbody rb = arrow.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * _shootStrength);
+        }
+        else
+        {
+            Debug.Log("Can't shoot if not on the wall");
+            //Add sound
+            //_failSound.Play();
+        }
     }
 }
