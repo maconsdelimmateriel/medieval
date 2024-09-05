@@ -8,14 +8,19 @@ public class LongBow : UdonSharpBehaviour
 {
     public GameObject _arrowPrefab; // The arrow to be shot.
     public float _shootStrength = 1f; // The shoot strength.
+    private float _mintHeight = 5f; //The minimum height at which the player can shoot.
+
     [SerializeField]
     private AudioSource _preparingSound; //Sound played when grabbing the bow.
     [SerializeField]
     private AudioSource _shootSound; //Sound played when shooting.
     [SerializeField]
     private AudioSource _failSound; //Sound telling the player they can't shoot if they are not on the wall.
-    private float _mintHeight = 5f; //The minimum height at which the player can shoot.
-
+    
+    [SerializeField]
+    private GameObject _bigCollider; //Real size collider for when the object is idle.
+    [SerializeField]
+    private GameObject _smallCollider; //Smaller collider for easiest use when object is picked up.
     private Collider[] _bowColliders = null; // All colliders on the bow gameObject and its children.
 
     private void Start()
@@ -28,6 +33,31 @@ public class LongBow : UdonSharpBehaviour
     {
         base.OnPickup();
         _preparingSound.Play();
+        SwitchColliders(false);
+    }
+
+    public override void OnDrop()
+    {
+        base.OnDrop();
+        SwitchColliders(true);
+    }
+
+    //Switches between small and big colliders
+    private void SwitchColliders(bool isSmallCollider)
+    {
+        if(_smallCollider != null && _bigCollider != null)
+        {
+            if (!isSmallCollider)
+            {
+                _smallCollider.SetActive(true);
+                _bigCollider.SetActive(false);
+            }
+            else
+            {
+                _bigCollider.SetActive(true);
+                _smallCollider.SetActive(false);
+            }
+        }
     }
 
     public override void OnPickupUseDown()
