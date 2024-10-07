@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3337742949375858463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3592593989342146338}
+  - component: {fileID: 5927035115745218160}
+  m_Layer: 13
+  m_Name: ColliderSmall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3592593989342146338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3337742949375858463}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000006, y: 0.49999952, z: 0.49999994, w: 0.5000004}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8729218052869505265}
+  m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 90.00001}
+--- !u!65 &5927035115745218160
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3337742949375858463}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.23, z: 0.04}
+  m_Center: {x: 0, y: -0.09, z: 0}
 --- !u!1 &6597604560373800755
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,7 +95,7 @@ GameObject:
   - component: {fileID: 8729218051561954157}
   - component: {fileID: 8729218051561954158}
   m_Layer: 13
-  m_Name: Collider
+  m_Name: ColliderBig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,6 +208,7 @@ Transform:
   - {fileID: 9128463209541554567}
   - {fileID: 8729218052797357849}
   - {fileID: 8729218051561954157}
+  - {fileID: 3592593989342146338}
   - {fileID: 3144069649202748191}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 180.016, y: -90.01001, z: -179.989}
@@ -256,6 +310,9 @@ MonoBehaviour:
   _shootStrength: 2000
   _preparingSound: {fileID: 8276189068461744589}
   _shootSound: {fileID: 2713327077535786634}
+  _failSound: {fileID: 0}
+  _bigCollider: {fileID: 8729218051561954156}
+  _smallCollider: {fileID: 3337742949375858463}
 --- !u!114 &8729218052869505269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,6 +706,8 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 7316619297080892893}
   _sharpness: 1
   _damage: 4
+  _impactSound: {fileID: 0}
+  _disparitionDelay: 5
 --- !u!114 &2834636295208710442
 MonoBehaviour:
   m_ObjectHideFlags: 0
